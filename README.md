@@ -2,6 +2,8 @@
 
 `AETHER SIGNAL`을 웹 비주얼 노벨로 전환하기 위한 공개 Monogatari 프로젝트입니다. 현재 저장소는 엔진과 저작 경계, 개발 명령, 빈 실행 장면만 갖춘 초기 스캐폴드이며 소설 본문은 포함하지 않습니다.
 
+- 공개 사이트: <https://newchobo.github.io/ather-vn/>
+
 ## 시작하기
 
 ```powershell
@@ -38,3 +40,17 @@ npm run validate
 ```
 
 브라우저 실기 검증은 `npm run dev`로 띄운 작업 전용 서버에 Playwright CLI를 연결해 수행합니다.
+
+## CI/CD와 GitHub Pages
+
+- Pull Request: 의존성 설치, 단위 검사, 공개 Pages 산출물 생성 및 경계 검사
+- `main` push: 동일 검증을 통과한 `output/pages` 산출물만 GitHub Pages에 자동 배포
+- 수동 재배포: GitHub Actions의 `CI and deploy GitHub Pages` 워크플로에서 `Run workflow`
+
+로컬에서 배포 산출물만 다시 만들려면 다음 명령을 실행합니다.
+
+```powershell
+npm run build:pages
+```
+
+Pages 산출물은 런타임 allowlist로 만들어지므로 `docs/`, `tests/`, `scripts/`, `node_modules/`와 저장소 운영 파일은 배포되지 않습니다.

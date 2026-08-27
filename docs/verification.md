@@ -4,10 +4,11 @@ Date: 2026-08-28 (Asia/Seoul)
 
 ## Automated
 
-- `npm run validate`: 6/6 Node tests pass.
+- `npm run validate`: 6/6 project tests and 3/3 Pages artifact tests pass.
 - `@monogatari/core` is pinned to `2.8.0`, and committed `engine/core/monogatari.js` matches the installed package output.
 - The bootstrap scene exposes only `Start`, ends cleanly, and contains no adapted story state.
 - The project asset manifest is empty and no canon-source directory is present.
+- `output/pages` is built from a runtime allowlist; authoring docs, CI files, tests, scripts, dependencies, and repository metadata are excluded.
 
 ## Browser
 

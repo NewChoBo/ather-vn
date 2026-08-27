@@ -44,5 +44,6 @@
 - Create missing official template files: `npm run bootstrap`
 - Run locally: `npm run dev`
 - Unit checks: `npm test`
+- Build the public Pages artifact: `npm run build:pages`
 - Browser checks: Playwright CLI against `npm run dev`
 - Full validation: `npm run validate`
