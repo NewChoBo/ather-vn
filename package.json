@@ -1,0 +1,24 @@
+{
+  "name": "ather-vn",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AETHER SIGNAL — Monogatari 기반 공개 웹 비주얼 노벨 프로젝트",
+  "scripts": {
+    "bootstrap": "npm run bootstrap:template && npm run sync:engine",
+    "bootstrap:template": "node scripts/bootstrap-template.mjs",
+    "sync:engine": "node scripts/sync-engine.mjs",
+    "postinstall": "npm run sync:engine",
+    "dev": "serve . --listen 5173 --no-clipboard",
+    "test": "node --test tests/**/*.test.mjs",
+    "validate": "npm run test"
+  },
+  "dependencies": {
+    "@monogatari/core": "2.8.0"
+  },
+  "devDependencies": {
+    "serve": "14.2.6"
+  },
+  "engines": {
+    "node": ">=24 <25"
+  }
+}

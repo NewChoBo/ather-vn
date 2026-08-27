@@ -1,0 +1,24 @@
+{
+  "short_name": "Aether Signal",
+  "name": "AETHER SIGNAL",
+  "description": "AETHER SIGNAL 공개 웹 비주얼 노벨 프로젝트.",
+  "lang": "ko-KR",
+  "background_color": "#071015",
+  "theme_color": "#071015",
+  "orientation": "any",
+  "display": "fullscreen",
+  "start_url": "index.html",
+  "icons": [
+    {
+      "src": "assets/icons/icon_192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "assets/icons/icon_512x512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ]
+}

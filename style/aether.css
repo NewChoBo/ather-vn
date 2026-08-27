@@ -1,0 +1,76 @@
+:root {
+	--aether-ink: #071015;
+	--aether-panel: rgba(8, 24, 31, 0.9);
+	--aether-signal: #8ed9cf;
+	--aether-text: #d7e6e3;
+}
+
+main-screen[data-screen="main"] {
+	background:
+		linear-gradient(rgba(142, 217, 207, 0.06) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(142, 217, 207, 0.06) 1px, transparent 1px),
+		radial-gradient(circle at 50% 25%, #15333c, var(--aether-ink) 64%);
+	background-size: 2rem 2rem, 2rem 2rem, auto;
+}
+
+.aether-title-card {
+	color: var(--aether-text);
+	left: clamp(1.5rem, 6vw, 6rem);
+	letter-spacing: 0.12em;
+	position: absolute;
+	top: clamp(2rem, 10vh, 7rem);
+}
+
+.aether-title-card p {
+	color: var(--aether-signal);
+	font-family: "Cascadia Mono", "IBM Plex Mono", monospace;
+	font-size: 0.72rem;
+	margin: 0 0 0.8rem;
+}
+
+.aether-title-card h1 {
+	font-family: "Cascadia Mono", "IBM Plex Mono", monospace;
+	font-size: clamp(2.4rem, 7vw, 6.5rem);
+	font-weight: 300;
+	letter-spacing: 0.08em;
+	margin: 0;
+	text-shadow: 0 0 2rem rgba(142, 217, 207, 0.25);
+}
+
+main-menu {
+	background: var(--aether-panel);
+	border: 1px solid rgba(142, 217, 207, 0.25);
+	padding: 1rem;
+}
+
+main-menu button {
+	border-radius: 0;
+}
+
+main-menu button:hover {
+	border-color: var(--aether-signal);
+}
+
+@media (max-width: 48rem) {
+	.aether-title-card {
+		left: 1.25rem;
+		top: 2rem;
+	}
+
+	main-menu {
+		bottom: 1rem;
+		left: 1rem;
+		position: absolute;
+		right: 1rem;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
+}
