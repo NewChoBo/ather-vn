@@ -15,6 +15,7 @@
 ## Ownership boundaries
 
 - `engine/`: generated from pinned `@monogatari/core`; do not hand-edit it.
+- `@newchobo/vn-components`: 커밋 SHA로 고정한 엔진 비의존 공통 Web Component. `--components` 로컬 연결은 개발 전용이다.
 - `js/`, `style/`, `scenes/`, `characters/`, `state/`, and `assets/manifest.*`: Aether-owned authoring surfaces.
 - `assets/`: engine icons plus project media. Reference project media by stable asset ID.
 - Aether-specific evidence, classification, authority, audit, and console behavior stays project-local until repeated cross-project use proves a generic engine need.
@@ -24,6 +25,7 @@
 
 - Prefer official Monogatari actions, components, configuration, and save system.
 - Check local official engine files and Monogatari documentation before adding custom runtime behavior.
+- 공통 UI는 등록된 `<nc-vn-*>` 요소의 문서화된 property/event 계약으로 소비한다. 런타임 HTML 문자열 helper나 임의 JSON attribute로 컴포넌트를 만들지 않는다.
 - A scene change should normally touch one scene file, optional character/state or asset manifest entries, and its test.
 - Do not add a state axis until an authored scene needs it.
 - Choices record evidence, responsibility, cost, and memory; do not label them as good or bad.
@@ -43,6 +45,7 @@
 - Install and sync engine: `npm install`
 - Create missing official template files: `npm run bootstrap`
 - Run locally: `npm run dev`
+- Run with a live component-kit checkout: `npm run dev -- --components ../vn-component-kit`
 - Unit checks: `npm test`
 - Build the public Pages artifact: `npm run build:pages`
 - Browser checks: Playwright CLI against `npm run dev`

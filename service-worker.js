@@ -27,9 +27,11 @@ const files = [
 
 	// Style Sheets
 	'style/main.css',
+	'node_modules/@newchobo/vn-components/index.css',
 	'style/aether.css',
 
 	// JavaScript Files
+	'node_modules/@newchobo/vn-components/index.js',
 	'js/options.js',
 	'js/storage.js',
 	'js/script.js',

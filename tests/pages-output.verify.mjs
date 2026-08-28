@@ -16,6 +16,9 @@ test('Pages artifact contains the complete runtime entrypoints', () => {
 		'engine/core/monogatari.css',
 		'engine/core/monogatari.js',
 		'engine/debug/debug.js',
+		'vendor/vn-components/index.css',
+		'vendor/vn-components/index.js',
+		'vendor/vn-components/custom-elements.json',
 		'js/main.js',
 		'scenes/bootstrap.js',
 		'assets/manifest.json'
@@ -43,6 +46,9 @@ test('Pages artifact excludes authoring, CI, and dependency files', () => {
 
 test('HTML runtime references are relative and resolve inside the Pages artifact', () => {
 	const html = readFileSync(join(output, 'index.html'), 'utf8');
+	assert.match(html, /\.\/vendor\/vn-components\/index\.css/);
+	assert.match(html, /\.\/vendor\/vn-components\/index\.js/);
+	assert.doesNotMatch(html, /node_modules\/\@newchobo\/vn-components/);
 	const references = [...html.matchAll(/(?:href|src)="([^"]+)"/g)].map((match) => match[1]);
 
 	for (const reference of references) {

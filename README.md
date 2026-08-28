@@ -14,6 +14,8 @@ npm run dev
 
 브라우저에서 `http://127.0.0.1:5173`을 엽니다.
 
+기본 `npm run dev`는 `package-lock.json`에 고정된 `@newchobo/vn-components`를 사용합니다. 공통 키트 저장소를 동시에 개발할 때만 `npm run dev -- --components ../vn-component-kit`으로 로컬 소스를 연결합니다. 현재 Monogatari 정적 로딩 구조에는 Vite 번들 단계가 필요하지 않습니다.
+
 ## 정본과 공개 경계
 
 - 게임 설계 정본: Notion `🎮 Aether Signal — Webgame 설계실`
@@ -29,6 +31,7 @@ npm run dev
 - `characters/`: 프로젝트 캐릭터 등록
 - `assets/manifest.json`: 공개 런타임 자산과 안정 ID의 목록
 - `style/`: Aether 전용 화면 스타일
+- `@newchobo/vn-components`: 여러 VN이 공유하는 엔진 비의존 Web Component 계약
 - `tests/`: 프로젝트 경계와 실행 가능성 검증
 
 Evidence, classification, authority, audit, operator-console 기능은 첫 플레이어블 장면이 실제로 요구할 때 project-local 확장으로 추가합니다. 공용 엔진 변경은 공식 기능으로 해결할 수 없다는 근거와 둘 이상의 프로젝트에서 반복되는 요구가 확인된 뒤 별도 작업으로 진행합니다.
@@ -53,4 +56,4 @@ npm run validate
 npm run build:pages
 ```
 
-Pages 산출물은 런타임 allowlist로 만들어지므로 `docs/`, `tests/`, `scripts/`, `node_modules/`와 저장소 운영 파일은 배포되지 않습니다.
+Pages 산출물은 런타임 allowlist로 만들어집니다. 공통 키트의 공개 파일 세 개만 `vendor/vn-components/`로 복사하고, `docs/`, `tests/`, `scripts/`, `node_modules/`와 저장소 운영 파일은 배포하지 않습니다.

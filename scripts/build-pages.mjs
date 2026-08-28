@@ -3,6 +3,7 @@ import {
 	existsSync,
 	lstatSync,
 	mkdirSync,
+	readFileSync,
 	readdirSync,
 	rmSync,
 	statSync,
@@ -14,6 +15,9 @@ import { fileURLToPath } from 'node:url';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const output = join(root, 'output', 'pages');
 const outputRelative = relative(root, output).replaceAll('\\', '/');
+const componentSource = join(root, 'node_modules', '@newchobo', 'vn-components');
+const componentTarget = join(output, 'vendor', 'vn-components');
+const componentFiles = ['index.css', 'index.js', 'custom-elements.json'];
 const runtimeEntries = [
 	'assets',
 	'characters',
@@ -46,6 +50,20 @@ for (const entry of runtimeEntries) {
 
 	mkdirSync(dirname(target), { recursive: true });
 	cpSync(source, target, { recursive: true });
+}
+
+for (const entry of componentFiles) {
+	const source = join(componentSource, entry);
+	const target = join(componentTarget, entry);
+	if (!existsSync(source)) throw new Error(`Missing shared component runtime file: ${entry}`);
+	mkdirSync(dirname(target), { recursive: true });
+	cpSync(source, target);
+}
+
+for (const entry of ['index.html', 'service-worker.js']) {
+	const target = join(output, entry);
+	const source = readFileSync(target, 'utf8');
+	writeFileSync(target, source.replaceAll('node_modules/@newchobo/vn-components', 'vendor/vn-components'), 'utf8');
 }
 
 writeFileSync(join(output, '.nojekyll'), '', 'utf8');

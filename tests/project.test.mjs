@@ -14,12 +14,26 @@ function runScript(path, context) {
 test('engine is pinned and generated from the installed Monogatari package', () => {
 	const packageJson = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8'));
 	assert.equal(packageJson.dependencies['@monogatari/core'], '2.8.0');
+	assert.equal(
+		packageJson.dependencies['@newchobo/vn-components'],
+		'https://github.com/NewChoBo/vn-component-kit/archive/bd15118116ae4a9efa196eb54513b02bb7ec5c40.tar.gz'
+	);
 	assert.ok(existsSync(join(root, 'engine', 'LICENSE')));
 	assert.ok(existsSync(join(root, 'engine', 'core', 'monogatari.js')));
 	assert.deepEqual(
 		readFileSync(join(root, 'engine', 'core', 'monogatari.js')),
 		readFileSync(join(root, 'node_modules', '@monogatari', 'core', 'dist', 'engine', 'core', 'monogatari.js'))
 	);
+	assert.ok(existsSync(join(root, 'node_modules', '@newchobo', 'vn-components', 'custom-elements.json')));
+});
+
+test('shared Web Components expose validated engine-independent contracts', () => {
+	const context = {};
+	context.globalThis = context;
+	runScript('node_modules/@newchobo/vn-components/index.js', context);
+	assert.equal(context.NewChoboVnComponents.buttonTag, 'nc-vn-button');
+	assert.equal(context.NewChoboVnComponents.choiceTag, 'nc-vn-choice');
+	assert.equal(context.NewChoboVnComponents.register(), false);
 });
 
 test('bootstrap scene is story-free and structurally playable', () => {
@@ -74,6 +88,7 @@ test('public scaffold does not contain canon source directories', () => {
 test('HTML loads project modules before initialization', () => {
 	const html = readFileSync(join(root, 'index.html'), 'utf8');
 	const required = [
+		'./node_modules/@newchobo/vn-components/index.js',
 		'./js/options.js',
 		'./js/storage.js',
 		'./js/script.js',
@@ -87,4 +102,5 @@ test('HTML loads project modules before initialization', () => {
 	for (let index = 1; index < required.length; index += 1) {
 		assert.ok(html.indexOf(required[index - 1]) < html.indexOf(required[index]), `${required[index]} is out of order`);
 	}
+	assert.ok(html.includes('./node_modules/@newchobo/vn-components/index.css'));
 });
